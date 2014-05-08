@@ -938,25 +938,15 @@ int generateMTRandom(unsigned int s, int range)
 
 
 static const int64 nMinSubsidy = 10 * COIN;
-static const int CUTOFF_HEIGHT = 10000; // Height at the end of 5 weeks
+static const int CUTOFF_HEIGHT = 10000; // Height 
 // miner's coin base reward based on nBits
 int64 GetProofOfWorkReward(int nHeight, int64 nFees, uint256 prevHash)
 {
     int64 nSubsidy = 37500 * COIN;
-
-    std::string cseed_str = prevHash.ToString().substr(14,7);
-    const char* cseed = cseed_str.c_str();
-    long seed = hex2long(cseed);
-    int rand = generateMTRandom(seed, 8000);
     
-    if (nHeight == 1)
+    if (nHeight == 2)
         nSubsidy = 4500000 * COIN;  // 1.2% Premine
 
-    if(nHeight == 2)
-    {
-        nSubsidy = TAX_PERCENTAGE * CIRCULATION_MONEY;
-        return nSubsidy + nFees;
-    }
     
     else if(nHeight > CUTOFF_HEIGHT)
     {
@@ -2550,7 +2540,7 @@ bool LoadBlockIndex(bool fAllowNew)
     if (mapBlockIndex.empty())
     {
         if (!fAllowNew)
-            return false;
+            return true;
 
         // Genesis block
         const char* pszTimestamp = "WolfCoin, 5124 41924 58129 4192 9955, 5500.";
@@ -2568,8 +2558,8 @@ bool LoadBlockIndex(bool fAllowNew)
         block.nVersion = 1;
         block.nTime    = 1399558274;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
-        block.nNonce   = 1405605;
-    if (false  && (block.GetHash() != hashGenesisBlock)) {
+        block.nNonce   = 0;
+    if (true  && (block.GetHash() != hashGenesisBlock)) {
 
         // This will figure out a valid hash and Nonce if you're
         // creating a different genesis block:
@@ -2577,7 +2567,7 @@ bool LoadBlockIndex(bool fAllowNew)
             while (block.GetHash() > hashTarget)
                {
                    ++block.nNonce;
-                   if (block.nNonce == 1405605)
+                   if (block.nNonce == 0)
                    {
                        printf("NONCE WRAPPED, incrementing time");
                        ++block.nTime;
@@ -2595,7 +2585,7 @@ bool LoadBlockIndex(bool fAllowNew)
 
 
 
-        assert(block.hashMerkleRoot == uint256("522cfaa2848a1da82e6a660510f50bcc8b079565d6b5ba5d19dc200da52dad22"));
+        assert(block.hashMerkleRoot == uint256(""));
 
 		assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
 
