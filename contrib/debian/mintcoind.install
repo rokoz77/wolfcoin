@@ -1,0 +1,2 @@
+debian/bin/WolfCoind usr/bin
+src/WolfCoind usr/lib/WolfCoin

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=WolfCoin
+Comment=WolfCoin P2P Cryptocurrency
+Comment[fr]=WolfCoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=WolfCoin, eşten eşe kriptografik sanal para birimi
+Comment[es]=WolfCoin, una criptomoneda P2P
+Exec=/usr/bin/WolfCoin-qt
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/bitcoin80.xpm
+MimeType=x-scheme-handler/WolfCoin;
+Categories=Office;
