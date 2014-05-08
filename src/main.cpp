@@ -2550,7 +2550,7 @@ bool LoadBlockIndex(bool fAllowNew)
     if (mapBlockIndex.empty())
     {
         if (!fAllowNew)
-            return true;
+            return false;
 
         // Genesis block
         const char* pszTimestamp = "WolfCoin, 5124 41924 58129 4192 9955, 5500.";
@@ -2568,8 +2568,8 @@ bool LoadBlockIndex(bool fAllowNew)
         block.nVersion = 1;
         block.nTime    = 1399558274;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
-        block.nNonce   = 0;
-    if (true  && (block.GetHash() != hashGenesisBlock)) {
+        block.nNonce   = 1405605;
+    if (false  && (block.GetHash() != hashGenesisBlock)) {
 
         // This will figure out a valid hash and Nonce if you're
         // creating a different genesis block:
@@ -2577,7 +2577,7 @@ bool LoadBlockIndex(bool fAllowNew)
             while (block.GetHash() > hashTarget)
                {
                    ++block.nNonce;
-                   if (block.nNonce == 0)
+                   if (block.nNonce == 1405605)
                    {
                        printf("NONCE WRAPPED, incrementing time");
                        ++block.nTime;
@@ -2595,7 +2595,7 @@ bool LoadBlockIndex(bool fAllowNew)
 
 
 
-        assert(block.hashMerkleRoot == uint256(""));
+        assert(block.hashMerkleRoot == uint256("522cfaa2848a1da82e6a660510f50bcc8b079565d6b5ba5d19dc200da52dad22"));
 
 		assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
 
